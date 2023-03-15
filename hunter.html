@@ -17,43 +17,94 @@
 <h2>Find the mouse by Carter</h2>
 <p id="bushes">Click on the bushes to search for the mouse, beware the cat</p>
 <p id="penalty">Penalty is zero</p>
-<p>Click for help</p>
+<p onclick="help()">Click for help</p>
 <p id="help">Help report</p>
 <div class="container">
   <div class="row">
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
+    <div class="col"><img src="bush.jpg" id="A1" height="100" width="100" onclick="check(0)"></div>
+    <div class="col"><img src="bush.jpg" id="A2" height="100" width="100" onclick="check(1)"></div>
+    <div class="col"><img src="bush.jpg" id="A3" height="100" width="100" onclick="check(2)"></div>
+    <div class="col"><img src="bush.jpg" id="A4" height="100" width="100" onclick="check(3)"></div>
+    <div class="col"><img src="bush.jpg" id="A5" height="100" width="100" onclick="check(4)"></div>
+    <div class="col"><img src="bush.jpg" id="A6" height="100" width="100" onclick="check(5)"></div>
   </div>
   <div class="row">
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
+    <div class="col"><img src="bush.jpg" id="B1" height="100" width="100" onclick="check(6)"></div>
+    <div class="col"><img src="bush.jpg" id="B2" height="100" width="100" onclick="check(7)"></div>
+    <div class="col"><img src="bush.jpg" id="B3" height="100" width="100" onclick="check(8)"></div>
+    <div class="col"><img src="bush.jpg" id="B4" height="100" width="100" onclick="check(9)"></div>
+    <div class="col"><img src="bush.jpg" id="B5" height="100" width="100" onclick="check(10)"></div>
+    <div class="col"><img src="bush.jpg" id="B6" height="100" width="100" onclick="check(11)"></div>
   </div>
   <div class="row">
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
+    <div class="col"><img src="bush.jpg" id="C1" height="100" width="100" onclick="check(12)"></div>
+    <div class="col"><img src="bush.jpg" id="C2" height="100" width="100" onclick="check(13)"></div>
+    <div class="col"><img src="bush.jpg" id="C3" height="100" width="100" onclick="check(14)"></div>
+    <div class="col"><img src="bush.jpg" id="C4" height="100" width="100" onclick="check(15)"></div>
+    <div class="col"><img src="bush.jpg" id="C5" height="100" width="100" onclick="check(16)"></div>
+    <div class="col"><img src="bush.jpg" id="C6" height="100" width="100" onclick="check(17)"></div>
   </div>
   <div class="row">
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
-    <div class="col"><img src="bush.jpg" height="100" width="100"></div>
+    <div class="col"><img src="bush.jpg" id="D1" height="100" width="100" onclick="check(18)"></div>
+    <div class="col"><img src="bush.jpg" id="D2" height="100" width="100" onclick="check(19)"></div>
+    <div class="col"><img src="bush.jpg" id="D3" height="100" width="100" onclick="check(20)"></div>
+    <div class="col"><img src="bush.jpg" id="D4" height="100" width="100" onclick="check(21)"></div>
+    <div class="col"><img src="bush.jpg" id="D5" height="100" width="100" onclick="check(22)"></div>
+    <div class="col"><img src="bush.jpg" id="D6" height="100" width="100" onclick="check(23)"></div>
   </div>
   
 </div>
+<script>
+  let ids = ["A1","A2","A3","A4","A5","A6","B1","B2","B3","B4","B5","B6","C1","C2","C3","C4","C5","C6","D1","D2","D3","D4","D5","D6"]
+  let checkCount = 0
+  let penalty = 0
+  let lastCheck = 0
+  let mouseLocation = 13
+  let catLocation = 21
+  let gameOver = false
+
+  function check(position){
+    if(!gameOver){
+      let id = ids[position]
+      let image = document.getElementById(id)
+      checkCount++
+      penalty++
+      if(position == mouseLocation){
+        image.src = "mouse.jfif"
+        gameOver = true
+        penalty -= 3
+      }else if(position == catLocation){
+        image.src = "tiger.jpg"
+        gameOver = true
+        penalty += 4
+      }else{
+        image.src = "grass.jpg"
+      }
+      document.getElementById("penalty").innerHTML = "Penalty is "+ penalty
+      lastCheck = position
+    }
+    
+  }
+  function help(){
+      penalty+=2
+      document.getElementById("penalty").innerHTML = "Penalty is "+ penalty
+      col = lastCheck % 6
+      row = lastCheck % 4
+      catCol = catLocation % 6
+      catRow = catLocation % 4
+      mouseCol = mouseLocation % 6
+      mouseRow = mouseLocation % 4
+
+      if((Math.abs(mouseRow - row)<=1)&&(Math.abs(mouseCol - col)<=1)){
+        document.getElementById("help").innerHTML = "Squeak"
+      }else if((Math.abs(catRow - row)<=1)&&(Math.abs(catCol - col)<=1)){
+        document.getElementById("help").innerHTML = "Meow"
+      }else{
+        document.getElementById("help").innerHTML = "Sorry, no help available"
+      }
+    }
+
+</script>
 
 
 
